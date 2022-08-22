@@ -1,0 +1,39 @@
+﻿@model Expense_Tracker.Models.Transaction
+
+@{
+    ViewData["PageTitle"] = Model.TransactionId == 0 ? "Create Transaction" : "Edit Transaction";
+}
+
+<h4>Transaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5">
+            <form asp-action="AddOrEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" name="TransactionId" value="@Model.TransactionId"/>
+                <div class="mb-3">
+                    <ejs-datepicker id="date" ejs-for="Date" placeholder="Date" floatLabelType="Always" format="dd-MMM-yyyy"></ejs-datepicker>
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-dropdownlist id="ddlCategory" dataSource="ViewBag.Categories" ejs-for="CategoryId" floatLabelType="Always" placeholder="Category" allowFiltering="true" ignoreAccent="true" filterType="Contains">
+                        <e-dropdownlist-fields value="CategoryId" text="TitleWithIcon"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+                    <span asp-validation-for="CategoryId" class="text-danger fs-6"></span>
+
+                </div>
+                <div class="mb-3">
+                    <ejs-numerictextbox ejs-for="Amount" placeholder="Amount" floatLabelType="Always" min="0" format="c0"></ejs-numerictextbox>
+                    <span asp-validation-for="Amount" class="text-danger fs-6"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-textbox id="note" placeholder="Note" ejs-for="Note" floatLabelType="Always" multiline="true"></ejs-textbox>
+                </div>
+                <div class="mb-3">
+                <ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
